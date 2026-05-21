@@ -1,0 +1,11 @@
+.authToggle {
+    padding: 6px 10px;
+    height: fit-content;
+    align-items: center;
+    display: flex;
+    justify-content: center
+}
+
+.active {
+    border-bottom: 2px solid var(--blue-accent);
+}
