@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./AuthForms.module.css";
+import { LoginForm } from "./LoginForm";
 
 export function AuthForms() {
 	const [isSignIn, setIsSignIn] = useState(true);
@@ -24,15 +25,7 @@ export function AuthForms() {
 				</div>
 
 				{/* Forms */}
-				<div className="flex flex-col">
-					<label htmlFor="email-login">Email Address</label>
-					<input
-						type="email"
-						name="email"
-						id="email-login"
-						className="px-2 py-1 w-full bg-secondary rounded-sm border-2 border-medium-gray/30 focus:outline-none focus:border-primary/60 transition-colors"
-					/>
-				</div>
+				<LoginForm />
 			</div>
 		</div>
 	);

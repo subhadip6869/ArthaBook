@@ -23,7 +23,19 @@
     --color-primary-hover: var(--blue-accent);
     --color-secondary: var(--light-gray);
     --color-emerald-green: var(--emerald-green);
+    --color-gradient-green: var(--gradient-green);
     --color-medium-gray: var(--medium-gray);
+
+    --animate-spin-pause: spin-pause 1s ease-out infinite;
+}
+
+@keyframes spin-pause {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @layer base {
