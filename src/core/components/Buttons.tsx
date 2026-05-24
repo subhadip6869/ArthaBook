@@ -25,3 +25,25 @@ export function PrimaryButton({
 		</button>
 	);
 }
+
+export function SecondaryButton({
+	children,
+	className,
+	isLoading = false,
+	disabled,
+	...props
+}: PrimaryButtonProps) {
+	return (
+		<button
+			{...props}
+			disabled={isLoading || disabled}
+			className={`cursor-pointer bg-medium-gray/15 hover:bg-medium-gray/30 py-2 px-4 rounded-sm flex justify-center transition-colors ${className || ""}`}
+		>
+			{isLoading ? (
+				<CgSpinnerTwo className="animate-spin-pause" size={24} />
+			) : (
+				children
+			)}
+		</button>
+	);
+}

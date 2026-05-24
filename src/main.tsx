@@ -1,12 +1,39 @@
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router";
-import { AuthPage } from "./features/auth";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+import { AuthPage, AuthProvider } from "./features/auth";
+import { NotFoundPage } from "./features/common";
+import { DashboardPage } from "./features/dashboard";
 import "./index.css";
+import { AppLayout } from "./layouts";
+import { ProtectedRoute, PublicRoute } from "./routes";
 
 createRoot(document.getElementById("root")!).render(
-	<BrowserRouter>
-		<Routes>
-			<Route path="/" element={<AuthPage />} />
-		</Routes>
-	</BrowserRouter>,
+	<AuthProvider>
+		<BrowserRouter>
+			<Routes>
+				{/* Root Redirect */}
+				<Route path="/" element={<Navigate to="/auth" replace />} />
+
+				{/* Public Routes */}
+				<Route element={<PublicRoute />}>
+					<Route path="/auth" element={<AuthPage />} />
+				</Route>
+
+				{/* Protected App Routes */}
+				<Route element={<ProtectedRoute />}>
+					<Route element={<AppLayout />}>
+						<Route path="/dashboard" element={<DashboardPage />} />
+
+						{/* <Route
+							path="/investments"
+							element={<InvestmentsPage />}
+						/> */}
+					</Route>
+				</Route>
+
+				{/* 404 */}
+				<Route path="*" element={<NotFoundPage />} />
+			</Routes>
+		</BrowserRouter>
+	</AuthProvider>,
 );

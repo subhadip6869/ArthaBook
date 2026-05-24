@@ -1,4 +1,4 @@
-import logo from "../../../assets/arthabook.png";
+import logo from "../../../../assets/arthabook.png";
 
 type LogoPanelProps = {
 	size?: number;

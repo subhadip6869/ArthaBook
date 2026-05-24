@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Logo from "../../../assets/arthabook.png";
+import Logo from "../../../../assets/arthabook.png";
 import styles from "./AuthForms.module.css";
 import { LoginForm } from "./LoginForm";
 import { SigninForm } from "./SigninForm";
