@@ -1,6 +1,6 @@
 import { useReducer, useState } from "react";
 import { FiEye } from "react-icons/fi";
-import { useNavigate } from "react-router";
+import { toast } from "sonner";
 import { PrimaryButton } from "../../../../core/components/Buttons";
 import { Field, Input } from "../../../../core/components/InputComponents";
 import {
@@ -13,8 +13,6 @@ export function SigninForm() {
 	const [state, dispatch] = useReducer(signupFormReducer, initialSignupState);
 	const [passVisible, setPassVisible] = useState(false);
 
-	const navigate = useNavigate();
-
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
 
@@ -22,15 +20,12 @@ export function SigninForm() {
 		try {
 			setLoading(true);
 			setError("");
-
 			if (state.password !== state.confirmPassword) {
 				setError("Passwords do not match");
 				return;
 			}
-
 			await emailSignUp(state.email, state.password, state.name);
-
-			navigate("/dashboard");
+			toast.success("Verification email sent successfully");
 		} catch (error) {
 			setError("Failed to create account");
 		} finally {
