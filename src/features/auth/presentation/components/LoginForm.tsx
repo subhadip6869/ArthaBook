@@ -16,6 +16,8 @@ import {
 } from "../../data/reducers/loginFormReducer";
 import {
 	emailSignIn,
+	forgotPassword,
+	googleSignIn,
 	resendVerificationEmail,
 } from "../../data/services/authService";
 
@@ -25,26 +27,23 @@ export function LoginForm() {
 
 	const navigate = useNavigate();
 
-	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
-	const [showVerificationModal, setShowVerificationModal] = useState(false);
+	const [googleLoading, setGoogleLoading] = useState(false);
 	const [unverifiedUser, setUnverifiedUser] = useState<User | null>(null);
 
 	async function handleLogin() {
 		try {
 			setLoading(true);
-			setError("");
 			let result = await emailSignIn(state.email, state.password);
 			if (!result.success) {
 				if (result.reason === "EMAIL_NOT_VERIFIED") {
 					setUnverifiedUser(result.user);
-					setShowVerificationModal(true);
 					return;
 				}
 			}
 			navigate("/dashboard");
 		} catch (error) {
-			setError("Invalid email or password");
+			toast.error("Invalid email or password");
 		} finally {
 			setLoading(false);
 		}
@@ -56,21 +55,50 @@ export function LoginForm() {
 		}
 		try {
 			await resendVerificationEmail(unverifiedUser);
-			setShowVerificationModal(false);
+			setUnverifiedUser(null);
 			toast.success("Verification email resent successfully.");
 		} catch (error) {
 			toast.error("Failed to resend verification email.");
 		}
 	}
 
+	async function handleGoogleLogin() {
+		try {
+			setGoogleLoading(true);
+			await googleSignIn();
+			toast.success("Logged in successfully");
+			navigate("/dashboard");
+		} catch (error) {
+			toast.error("Google sign-in failed");
+		} finally {
+			setGoogleLoading(false);
+		}
+	}
+
+	async function handleResetPassword() {
+		if (!state.email.trim()) {
+			toast.error("Please enter your email");
+			return;
+		}
+		try {
+			setLoading(true);
+			await forgotPassword(state.email);
+			toast.success("Password reset email sent");
+		} catch (error) {
+			toast.error("Failed to send reset email");
+		} finally {
+			setLoading(false);
+		}
+	}
+
 	return (
 		<>
-			{showVerificationModal && (
+			{unverifiedUser && (
 				<Modal
-					open={showVerificationModal}
+					open={!!unverifiedUser}
 					title="Verify Your Email"
 					message="Your email address has not been verified yet."
-					onClose={() => setShowVerificationModal(false)}
+					onClose={() => setUnverifiedUser(null)}
 					onConfirm={handleResendVerification}
 					confirmText="Resend Email"
 					cancelText="Close"
@@ -124,10 +152,10 @@ export function LoginForm() {
 					</span>
 				</Field>
 
-				{/* Error Message */}
-				{error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-
-				<div className="flex justify-end items-center text-sm text-medium-gray/80 gap-2 cursor-pointer hover:text-medium-gray transition-colors">
+				<div
+					className="flex justify-end items-center text-sm text-medium-gray/80 gap-2 cursor-pointer hover:text-medium-gray transition-colors"
+					onClick={handleResetPassword}
+				>
 					<span>Forgot Password?</span>
 				</div>
 
@@ -139,7 +167,11 @@ export function LoginForm() {
 					Or continue with
 				</p>
 
-				<SecondaryButton className="w-full mt-3 items-center gap-2">
+				<SecondaryButton
+					className="w-full mt-3 items-center gap-2"
+					isLoading={googleLoading}
+					onClick={handleGoogleLogin}
+				>
 					<span>
 						<FcGoogle size={24} />
 					</span>

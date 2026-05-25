@@ -1,7 +1,10 @@
 import {
     createUserWithEmailAndPassword,
+    GoogleAuthProvider,
     sendEmailVerification,
+    sendPasswordResetEmail,
     signInWithEmailAndPassword,
+    signInWithPopup,
     signOut,
     updateProfile,
     type User,
@@ -9,10 +12,12 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
-export async function emailSignIn(
-    email: string,
-    password: string,
-) {
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
+    prompt: "select_account",
+});
+
+export async function emailSignIn(email: string, password: string) {
     const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
@@ -52,14 +57,21 @@ export async function emailSignUp(
         email,
         password,
     );
-
     await updateProfile(userCredential.user, {
         displayName: name,
     });
-
     await sendEmailVerification(userCredential.user);
     await signOut(auth);
     return userCredential;
+}
+
+export async function googleSignIn() {
+    const result = await signInWithPopup(auth, googleProvider);
+    return result.user;
+}
+
+export async function forgotPassword(email: string) {
+    await sendPasswordResetEmail(auth, email);
 }
 
 export async function logoutCurrentUser() {
