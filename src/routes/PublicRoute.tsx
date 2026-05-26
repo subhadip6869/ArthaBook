@@ -2,11 +2,15 @@ import { Navigate, Outlet } from "react-router";
 import { useAuth } from "../features/auth/data/hooks/useAuth";
 
 export function PublicRoute() {
-	const { isAuthenticated, loading } = useAuth();
+	const { isAuthenticated, loading, user } = useAuth();
 
 	if (loading) {
 		return <div>Loading...</div>;
 	}
 
-	return !isAuthenticated ? <Outlet /> : <Navigate to="/dashboard" replace />;
+	return !isAuthenticated || !user?.emailVerified ? (
+		<Outlet />
+	) : (
+		<Navigate to="/dashboard" replace />
+	);
 }
