@@ -1,17 +1,18 @@
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import { Toaster } from "sonner";
-import { AuthPage, AuthProvider } from "./features/auth";
+import { AuthPage } from "./features/auth";
 import { NotFoundPage } from "./features/common";
 import { DashboardPage } from "./features/dashboard";
 import "./index.css";
 import { AppLayout } from "./layouts";
 import { ProtectedRoute, PublicRoute } from "./routes";
+import { AppProviders } from "./providers/AppProviders";
 
 createRoot(document.getElementById("root")!).render(
 	<>
 		<Toaster richColors position="top-right" />
-		<AuthProvider>
+		<AppProviders>
 			<BrowserRouter>
 				<Routes>
 					{/* Root Redirect */}
@@ -41,6 +42,6 @@ createRoot(document.getElementById("root")!).render(
 					<Route path="*" element={<NotFoundPage />} />
 				</Routes>
 			</BrowserRouter>
-		</AuthProvider>
+		</AppProviders>
 	</>,
 );

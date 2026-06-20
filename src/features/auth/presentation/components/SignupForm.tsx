@@ -9,7 +9,7 @@ import {
 } from "../../data/reducers/signupFormReducer";
 import { emailSignUp } from "../../data/services/authService";
 
-export function SigninForm() {
+export function SignupForm() {
 	const [state, dispatch] = useReducer(signupFormReducer, initialSignupState);
 	const [passVisible, setPassVisible] = useState(false);
 

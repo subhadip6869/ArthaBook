@@ -2,7 +2,7 @@ import { useState } from "react";
 import Logo from "../../../../assets/arthabook.png";
 import styles from "./AuthForms.module.css";
 import { LoginForm } from "./LoginForm";
-import { SigninForm } from "./SigninForm";
+import { SignupForm } from "./SignupForm";
 
 export function AuthForms() {
 	const [isSignIn, setIsSignIn] = useState(true);
@@ -40,7 +40,7 @@ export function AuthForms() {
 				</div>
 
 				{/* Forms */}
-				{isSignIn ? <LoginForm /> : <SigninForm />}
+				{isSignIn ? <LoginForm /> : <SignupForm />}
 			</div>
 		</div>
 	);

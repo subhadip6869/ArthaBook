@@ -20,10 +20,13 @@ import {
 	googleSignIn,
 	resendVerificationEmail,
 } from "../../data/services/authService";
+import { createUser, getCurrentUser } from "../../../user/data/services/userService";
+import { useUser } from "../../../user/data/hooks/useUser";
 
 export function LoginForm() {
 	const [passVisible, setPassVisible] = useState(false);
 	const [state, dispatch] = useReducer(loginFormReducer, initialLoginState);
+	const { dispatch: userDispatch } = useUser();
 
 	const navigate = useNavigate();
 
@@ -41,6 +44,18 @@ export function LoginForm() {
 					return;
 				}
 			}
+			let user = await getCurrentUser();
+			if (!user) {
+				user = await createUser({
+					fullName: result.user?.displayName || "New User",
+					isdCode: null,
+					mobileNumber: result.user?.phoneNumber || null,
+					profilePhotoUrl: result.user?.photoURL || null,
+					dateOfBirth: null,
+					gender: null,
+				});
+			}
+			userDispatch({ type: "FETCH_SUCCESS", payload: user });
 			navigate("/dashboard");
 		} catch (error) {
 			toast.error("Invalid email or password");
@@ -65,8 +80,19 @@ export function LoginForm() {
 	async function handleGoogleLogin() {
 		try {
 			setGoogleLoading(true);
-			await googleSignIn();
-			toast.success("Logged in successfully");
+			const firebaseUser = await googleSignIn();
+			let user = await getCurrentUser();
+			if (!user) {
+				user = await createUser({
+					fullName: firebaseUser?.displayName || "New User",
+					isdCode: null,
+					mobileNumber: firebaseUser?.phoneNumber || null,
+					profilePhotoUrl: firebaseUser?.photoURL || null,
+					dateOfBirth: null,
+					gender: null,
+				});
+			}
+			userDispatch({ type: "FETCH_SUCCESS", payload: user });
 			navigate("/dashboard");
 		} catch (error) {
 			toast.error("Google sign-in failed");

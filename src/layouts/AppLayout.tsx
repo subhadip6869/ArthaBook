@@ -1,11 +1,12 @@
 import { Outlet, useNavigate } from "react-router";
 import { useAuth } from "../features/auth/data/hooks/useAuth";
+import Logo from "../assets/arthabook.png";
 import { logoutCurrentUser } from "../features/auth/data/services/authService";
+import { useUser } from "../features/user/data/hooks/useUser";
 
 export function AppLayout() {
 	const navigate = useNavigate();
-
-	const { user } = useAuth();
+	const { state: userState } = useUser();
 
 	async function handleLogout() {
 		try {
@@ -18,21 +19,21 @@ export function AppLayout() {
 
 	return (
 		<div>
-			<nav className="flex justify-between items-center px-6 py-4 border-b">
-				<div>
-					<h1 className="text-xl font-semibold">ArthaBook</h1>
-
-					<p className="text-sm text-gray-500">
-						{user?.displayName ?? user?.email}
-					</p>
+			<nav className="flex justify-between items-center px-6 w-full bg-secondary shadow-sm">
+				<div className="relative">
+					<div className="flex justify-center items-center">
+						<img src={Logo} alt="logo" width={60} height={60} />
+						<h1 className="text-2xl font-semibold text-center">
+							<span className="text-primary">Artha</span>
+							<span className="text-emerald-green">Book</span>
+						</h1>
+					</div>
 				</div>
 
-				<button
-					onClick={handleLogout}
-					className="px-4 py-2 rounded-md border cursor-pointer hover:bg-gray-100 transition-colors"
-				>
-					Sign Out
-				</button>
+				<div className="text-sm flex flex-col items-end">
+					<div>{userState.user?.fullName}</div>
+					<div className="text-gray-500">{userState.user?.email}</div>
+				</div>
 			</nav>
 
 			<main className="p-6">
