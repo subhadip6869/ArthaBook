@@ -1,5 +1,4 @@
 import { Outlet, useNavigate } from "react-router";
-import { useAuth } from "../features/auth/data/hooks/useAuth";
 import Logo from "../assets/arthabook.png";
 import { logoutCurrentUser } from "../features/auth/data/services/authService";
 import { useUser } from "../features/user/data/hooks/useUser";
@@ -30,9 +29,14 @@ export function AppLayout() {
 					</div>
 				</div>
 
-				<div className="text-sm flex flex-col items-end">
-					<div>{userState.user?.fullName}</div>
-					<div className="text-gray-500">{userState.user?.email}</div>
+        <div className="text-sm flex items-center">
+          <div className="flex flex-col">
+  					<div>{userState.user?.fullName}</div>
+  					<div className="text-gray-500">{userState.user?.email}</div>
+          </div>
+          <button onClick={handleLogout} className="ml-4 border border-black p-2 rounded-xl cursor-pointer">
+            Logout
+          </button>
 				</div>
 			</nav>
 
