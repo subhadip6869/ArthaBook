@@ -10,6 +10,11 @@ import {
 } from "../../../../core/components/Buttons";
 import { Field, Input } from "../../../../core/components/InputComponents";
 import { Modal } from "../../../../core/components/Modal";
+import { useUser } from "../../../profile/data/hooks/useUser";
+import {
+	createUser,
+	getCurrentUser,
+} from "../../../profile/data/services/userService";
 import {
 	initialLoginState,
 	loginFormReducer,
@@ -20,8 +25,6 @@ import {
 	googleSignIn,
 	resendVerificationEmail,
 } from "../../data/services/authService";
-import { createUser, getCurrentUser } from "../../../user/data/services/userService";
-import { useUser } from "../../../user/data/hooks/useUser";
 
 export function LoginForm() {
 	const [passVisible, setPassVisible] = useState(false);

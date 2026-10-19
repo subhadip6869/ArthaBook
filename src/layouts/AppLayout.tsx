@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router";
 import Logo from "../assets/arthabook.png";
 import { logoutCurrentUser } from "../features/auth/data/services/authService";
-import { useUser } from "../features/user/data/hooks/useUser";
+import { useUser } from "../features/profile/data/hooks/useUser";
 
 export function AppLayout() {
 	const navigate = useNavigate();
@@ -29,14 +29,19 @@ export function AppLayout() {
 					</div>
 				</div>
 
-        <div className="text-sm flex items-center">
-          <div className="flex flex-col">
-  					<div>{userState.user?.fullName}</div>
-  					<div className="text-gray-500">{userState.user?.email}</div>
-          </div>
-          <button onClick={handleLogout} className="ml-4 border border-black p-2 rounded-xl cursor-pointer">
-            Logout
-          </button>
+				<div className="text-sm flex items-center">
+					<div className="flex flex-col">
+						<div>{userState.user?.fullName}</div>
+						<div className="text-gray-500">
+							{userState.user?.email}
+						</div>
+					</div>
+					<button
+						onClick={handleLogout}
+						className="ml-4 border border-black p-2 rounded-xl cursor-pointer"
+					>
+						Logout
+					</button>
 				</div>
 			</nav>
 

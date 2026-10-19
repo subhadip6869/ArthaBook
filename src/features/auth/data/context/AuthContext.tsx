@@ -1,8 +1,11 @@
 import { onAuthStateChanged, signOut, type User } from "firebase/auth";
 import { createContext, useEffect, useState, type ReactNode } from "react";
+import { useUser } from "../../../profile/data/hooks/useUser";
+import {
+	createUser,
+	getCurrentUser,
+} from "../../../profile/data/services/userService";
 import { auth } from "../firebase/firebase";
-import { useUser } from "../../../user/data/hooks/useUser";
-import { createUser, getCurrentUser } from "../../../user/data/services/userService";
 
 interface AuthContextType {
 	user: User | null;
@@ -37,7 +40,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 				setUser(firebaseUser);
 				try {
 					const appUser = await getCurrentUser();
-					userDispatch({ type: "FETCH_SUCCESS", payload: appUser, });
+					userDispatch({ type: "FETCH_SUCCESS", payload: appUser });
 				} catch {
 					const appUser = await createUser({
 						fullName: firebaseUser.displayName ?? "New User",
