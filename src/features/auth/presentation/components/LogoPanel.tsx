@@ -1,42 +1,47 @@
-import logo from "../../../../assets/arthabook.png";
+import { IoReceiptOutline } from "react-icons/io5";
+import {
+	MdOutlineAccountBalance,
+	MdOutlineEventAvailable,
+} from "react-icons/md";
+import ArthabookLogo from "../../../../core/components/ArthabookLogo";
 
 type LogoPanelProps = {
-	size?: number;
 	className?: string;
 };
 
 const taglines = [
-	"Track NSC, KVP, FD, MF, Stocks & more",
-	"Monitor maturity dates & returns",
-	"Export reports in PDF, Excel & CSV",
+	{
+		icon: <MdOutlineAccountBalance className="text-accent" />,
+		tagline: "Every FD, NSC, KVP, PPF, fund and share in one ledger",
+	},
+	{
+		icon: <IoReceiptOutline className="text-accent" />,
+		tagline: "Balances derived from your transactions, not retyped totals",
+	},
+	{
+		icon: <MdOutlineEventAvailable className="text-accent" />,
+		tagline: "Export reports in PDF, Excel & CSV",
+	},
 ];
 
-export function LogoPanel({ size = 46, className = "" }: LogoPanelProps) {
+export function LogoPanel({ className = "" }: LogoPanelProps) {
 	return (
 		<div
-			className={`bg-secondary flex flex-col justify-center items-center ${className}`}
+			className={`flex flex-col justify-center items-start p-12 text-white ${className}`}
 		>
-			<img
-				src={logo}
-				alt="arthabook-logo"
-				width={size}
-				height={size}
-				style={{ scale: 1.4 }}
-			/>
+			<ArthabookLogo />
 
-			<h1 className="text-3xl font-semibold text-center">
-				<span className="text-primary">Artha</span>
-				<span className="text-emerald-green">Book</span>
-			</h1>
-			<p className="text-sm text-center text-medium-gray/80">
-				Your wealth. Your purpose. Your ledger.
+			<p className="font-display text-5xl pt-12">
+				A ledger for
+				<br />
+				everything you own.
 			</p>
 
-			<ul className="text-sm mt-12">
+			<ul className="mt-14 flex flex-col gap-4">
 				{taglines.map((tag, index) => (
 					<li key={index} className="flex gap-3 items-center">
-						<span className="h-1.5 w-1.5 rounded-full bg-primary-hover" />
-						{tag}
+						{tag.icon}
+						{tag.tagline}
 					</li>
 				))}
 			</ul>

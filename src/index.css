@@ -86,6 +86,7 @@
     --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
     --font-display: "Cormorant Garamond", Georgia, serif;
 
+    --color-forest: var(--ab-forest);
     --color-bg: var(--ab-bg);
     --color-surface: var(--ab-surface);
     --color-surface-2: var(--ab-surface-2);
