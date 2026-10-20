@@ -26,25 +26,27 @@ const taglines = [
 
 export function LogoPanel({ className = "" }: LogoPanelProps) {
 	return (
-		<div
-			className={`flex flex-col justify-center items-start p-12 text-white ${className}`}
+		<aside
+			className={`flex flex-col justify-center items-start p-4 md:p-12 text-white ${className}`}
 		>
 			<ArthabookLogo />
 
-			<p className="font-display text-5xl pt-12">
-				A ledger for
-				<br />
-				everything you own.
-			</p>
+			<div className="hidden md:flex flex-col">
+				<p className="font-display text-5xl pt-12">
+					A ledger for
+					<br />
+					everything you own.
+				</p>
 
-			<ul className="mt-14 flex flex-col gap-4">
-				{taglines.map((tag, index) => (
-					<li key={index} className="flex gap-3 items-center">
-						{tag.icon}
-						{tag.tagline}
-					</li>
-				))}
-			</ul>
-		</div>
+				<ul className="mt-14 flex flex-col gap-4">
+					{taglines.map((tag, index) => (
+						<li key={index} className="flex gap-3 items-center">
+							{tag.icon}
+							{tag.tagline}
+						</li>
+					))}
+				</ul>
+			</div>
+		</aside>
 	);
 }
