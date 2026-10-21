@@ -22,6 +22,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+			userDispatch({ type: "FETCH_START" });
 			try {
 				if (!firebaseUser) {
 					setUser(null);
@@ -37,7 +38,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 					return;
 				}
 
-				setUser(firebaseUser);
 				try {
 					const appUser = await getCurrentUser();
 					userDispatch({ type: "FETCH_SUCCESS", payload: appUser });
@@ -51,6 +51,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 						gender: null,
 					});
 					userDispatch({ type: "FETCH_SUCCESS", payload: appUser });
+				} finally {
+					setUser(firebaseUser);
 				}
 			} finally {
 				setLoading(false);

@@ -15,7 +15,7 @@ export function PrimaryButton({
 		<button
 			{...props}
 			disabled={isLoading || disabled}
-			className={`cursor-pointer bg-gradient-green hover:bg-emerald-green text-white py-2 px-4 rounded-sm flex justify-center transition-colors ${className || ""}`}
+			className={`min-h-11 bg-on-accent rounded-md cursor-pointer bg-gradient-green hover:bg-emerald-green text-white py-2 px-4 flex justify-center items-center transition-colors ${className || ""}`}
 		>
 			{isLoading ? (
 				<CgSpinnerTwo className="animate-spin-pause" size={24} />

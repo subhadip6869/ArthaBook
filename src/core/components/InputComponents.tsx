@@ -13,7 +13,7 @@ export function Field({
 }) {
 	return (
 		<div className={`flex flex-col mb-3 ${className || ""}`}>
-			<label htmlFor={labelFor} className="text-sm mb-1">
+			<label htmlFor={labelFor} className="text-sm mb-1 font-medium">
 				{label}
 			</label>
 			{children}
@@ -27,7 +27,7 @@ export function Input(
 	return (
 		<input
 			{...props}
-			className={`px-3 py-2 w-full bg-secondary rounded-sm border-2 border-medium-gray/30 focus:outline-none focus:border-primary/60 transition-colors text-sm ${props.className || ""}`}
+			className={`w-full min-h-11 rounded-md border bg-[#FFFFFF] px-3 text-on-accent focus:outline-none focus:ring-2 focus:ring-muted focus:border-transparent border-line-strong ${props.className || ""}`}
 		/>
 	);
 }

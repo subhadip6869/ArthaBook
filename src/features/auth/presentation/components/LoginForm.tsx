@@ -140,7 +140,7 @@ export function LoginForm() {
 					handleLogin();
 				}}
 			>
-				<Field label="Email Address" labelFor="email-login">
+				<Field label="Email" labelFor="email-login">
 					<Input
 						type="email"
 						name="email"
@@ -188,7 +188,7 @@ export function LoginForm() {
 					<span>Forgot Password?</span>
 				</div>
 
-				<PrimaryButton className="w-full" isLoading={loading}>
+				<PrimaryButton className="w-full mt-5" isLoading={loading}>
 					Login
 				</PrimaryButton>
 
