@@ -13,21 +13,19 @@ export function SignupForm() {
 	const [state, dispatch] = useReducer(signupFormReducer, initialSignupState);
 	const [passVisible, setPassVisible] = useState(false);
 
-	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
 
 	async function handleSignup() {
 		try {
 			setLoading(true);
-			setError("");
 			if (state.password !== state.confirmPassword) {
-				setError("Passwords do not match");
+				toast.error("Passwords do not match");
 				return;
 			}
 			await emailSignUp(state.email, state.password, state.name);
 			toast.success("Verification email sent successfully");
 		} catch (error) {
-			setError("Failed to create account");
+			toast.error("Failed to create account");
 		} finally {
 			setLoading(false);
 		}
@@ -42,6 +40,7 @@ export function SignupForm() {
 		>
 			<Field label="Full Name" labelFor="name-signup">
 				<Input
+					required
 					type="text"
 					name="name"
 					value={state.name}
@@ -58,6 +57,7 @@ export function SignupForm() {
 
 			<Field label="Email Address" labelFor="email-signup">
 				<Input
+					required
 					type="email"
 					name="email"
 					value={state.email}
@@ -74,6 +74,7 @@ export function SignupForm() {
 
 			<Field label="Enter Password" labelFor="password-signup">
 				<Input
+					required
 					type="password"
 					name="password"
 					value={state.password}
@@ -91,6 +92,7 @@ export function SignupForm() {
 			<Field label="Confirm Password" labelFor="confirm-pass-signup">
 				<span className="flex justify-center items-center relative">
 					<Input
+						required
 						type={passVisible ? "text" : "password"}
 						name="confirm-password"
 						value={state.confirmPassword}
@@ -112,9 +114,6 @@ export function SignupForm() {
 					</button>
 				</span>
 			</Field>
-
-			{/* Error Message */}
-			{error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
 			<PrimaryButton className="w-full mt-5" isLoading={loading}>
 				Create Account

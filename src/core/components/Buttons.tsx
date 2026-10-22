@@ -37,7 +37,7 @@ export function SecondaryButton({
 		<button
 			{...props}
 			disabled={isLoading || disabled}
-			className={`cursor-pointer bg-medium-gray/15 hover:bg-medium-gray/30 py-2 px-4 rounded-sm flex justify-center transition-colors ${className || ""}`}
+			className={`min-h-11 border border-muted cursor-pointer bg-medium-gray/15 hover:bg-medium-gray/30 py-2 px-4 rounded-sm flex justify-center transition-colors ${className || ""}`}
 		>
 			{isLoading ? (
 				<CgSpinnerTwo className="animate-spin-pause" size={24} />
