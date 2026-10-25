@@ -4,10 +4,14 @@ import { Toaster } from "sonner";
 import { AuthPage } from "./features/auth";
 import { NotFoundPage } from "./features/common";
 import { DashboardPage } from "./features/dashboard";
+import FinancePage from "./features/finance/presentation/FinancePage";
+import SettingsPage from "./features/profile/presentation/SettingsPage";
+import ReportsPage from "./features/reports/presentation/ReportsPage";
+import TransactionsPage from "./features/transactions/presentation/TransactionsPage";
 import "./index.css";
 import { AppLayout } from "./layouts";
-import { ProtectedRoute, PublicRoute } from "./routes";
 import { AppProviders } from "./providers/AppProviders";
+import { ProtectedRoute, PublicRoute } from "./routes";
 
 createRoot(document.getElementById("root")!).render(
 	<>
@@ -31,10 +35,19 @@ createRoot(document.getElementById("root")!).render(
 								element={<DashboardPage />}
 							/>
 
-							{/* <Route
-							path="/investments"
-							element={<InvestmentsPage />}
-						/> */}
+							<Route path="/finance" element={<FinancePage />} />
+
+							<Route
+								path="/transactions"
+								element={<TransactionsPage />}
+							/>
+
+							<Route path="/reports" element={<ReportsPage />} />
+
+							<Route
+								path="/settions"
+								element={<SettingsPage />}
+							/>
 						</Route>
 					</Route>
 
