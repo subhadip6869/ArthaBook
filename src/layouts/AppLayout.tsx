@@ -13,6 +13,7 @@ function SidebarLink({ item }: { item: NavItem }) {
 			<NavLink
 				to={item.to}
 				end={item.end}
+				title={item.label}
 				className={({ isActive }) =>
 					`text-[#E9E4D6] ${isActive ? "font-semibold bg-white/10" : ""} flex gap-1.5 items-center min-h-11 px-1 hover:bg-white/10 transition-colors rounded-md`
 				}
@@ -22,11 +23,15 @@ function SidebarLink({ item }: { item: NavItem }) {
 						{isActive ? (
 							<span
 								aria-hidden="true"
-								className="w-1 h-[3ch] rounded-r bg-[#E8A020]"
+								className="w-1 h-[3ch] shrink-0 rounded-r bg-[#E8A020]"
 							/>
 						) : null}
-						{isActive ? item.activeIcon : item.icon}
-						<span>{item.label}</span>
+						<span className="shrink-0">
+							{isActive ? item.activeIcon : item.icon}
+						</span>
+						<span className="min-w-0 flex-1 truncate">
+							{item.label}
+						</span>
 					</>
 				)}
 			</NavLink>
@@ -48,12 +53,23 @@ function UserBlock() {
 	}
 
 	return (
-		<div className="flex justify-between text-white">
-			<div className="flex flex-col">
-				<p>{userState.user?.fullName}</p>
-				<p>{userState.user?.email}</p>
+		<div className="flex justify-between text-white gap-1">
+			<div className="flex flex-col min-w-0 flex-1">
+				<p className="truncate" title={userState.user?.fullName}>
+					{userState.user?.fullName}
+				</p>
+				<p
+					className="truncate text-muted"
+					title={userState.user?.email}
+				>
+					{userState.user?.email}
+				</p>
 			</div>
-			<button className="cursor-pointer" onClick={handleLogout}>
+			<button
+				className="cursor-pointer"
+				onClick={handleLogout}
+				title="Sign out"
+			>
 				<MdLogout size={20} />
 			</button>
 		</div>
