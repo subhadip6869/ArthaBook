@@ -1,12 +1,9 @@
 import type { ReactElement } from "react";
 import type { IconType } from "react-icons";
-import { BiCalendarEvent, BiSolidCalendar } from "react-icons/bi";
 import { IoSettings, IoSettingsOutline } from "react-icons/io5";
 import {
 	MdAccountBalanceWallet,
-	MdNotifications,
 	MdOutlineAccountBalanceWallet,
-	MdOutlineNotifications,
 	MdOutlineReceiptLong,
 	MdOutlineSpaceDashboard,
 	MdOutlineSummarize,
@@ -35,7 +32,7 @@ export const NAV: NavItem[] = [
 		primary: true,
 	},
 	{
-		to: "/dashboard/finance",
+		to: "/finance",
 		label: "Finance",
 		icon: <MdOutlineAccountBalanceWallet size={20} />,
 		activeIcon: (
@@ -44,35 +41,35 @@ export const NAV: NavItem[] = [
 		primary: true,
 	},
 	{
-		to: "/dashboard/transactions",
+		to: "/transactions",
 		label: "Transactions",
 		icon: <MdOutlineReceiptLong size={20} />,
 		activeIcon: <MdReceiptLong size={20} className="text-[#E8A020]" />,
 		primary: true,
 	},
-	{
-		to: "/dashboard/planning",
+	/* {
+		to: "/planning",
 		label: "Planning",
 		icon: <BiCalendarEvent size={20} />,
 		activeIcon: <BiSolidCalendar size={20} className="text-[#E8A020]" />,
 		primary: true,
-	},
+	}, */
 	{
-		to: "/dashboard/reports",
+		to: "/reports",
 		label: "Reports",
 		icon: <MdOutlineSummarize size={20} />,
 		activeIcon: <MdSummarize size={20} className="text-[#E8A020]" />,
 		primary: false,
 	},
-	{
-		to: "/dashboard/notifications",
+	/* {
+		to: "/notifications",
 		label: "Notifications",
 		icon: <MdOutlineNotifications size={20} />,
 		activeIcon: <MdNotifications size={20} className="text-[#E8A020]" />,
 		primary: false,
-	},
+	}, */
 	{
-		to: "/dashboard/settings",
+		to: "/settings",
 		label: "Settings",
 		icon: <IoSettingsOutline size={20} />,
 		activeIcon: <IoSettings size={20} className="text-[#E8A020]" />,
