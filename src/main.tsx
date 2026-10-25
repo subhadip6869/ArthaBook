@@ -45,7 +45,7 @@ createRoot(document.getElementById("root")!).render(
 							<Route path="/reports" element={<ReportsPage />} />
 
 							<Route
-								path="/settions"
+								path="/settings"
 								element={<SettingsPage />}
 							/>
 						</Route>
