@@ -5,7 +5,7 @@ import { AuthPage } from "./features/auth";
 import { NotFoundPage } from "./features/common";
 import { DashboardPage } from "./features/dashboard";
 import FinancePage from "./features/finance/presentation/FinancePage";
-import SettingsPage from "./features/profile/presentation/SettingsPage";
+import SettingsPage from "./features/profile/presentation/pages/SettingsPage";
 import ReportsPage from "./features/reports/presentation/ReportsPage";
 import TransactionsPage from "./features/transactions/presentation/TransactionsPage";
 import "./index.css";

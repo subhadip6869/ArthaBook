@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { MdLogout } from "react-icons/md";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, Outlet, useNavigate } from "react-router";
 import ArthabookLogo from "../core/components/ArthabookLogo";
 import { logoutCurrentUser } from "../features/auth/data/services/authService";
 import { useUser } from "../features/profile/data/hooks/useUser";
@@ -178,6 +178,8 @@ export function AppLayout() {
 						{/* <span>arthabook</span> */}
 					</div>
 				</header>
+
+				<Outlet />
 			</main>
 		</div>
 	);
