@@ -1,0 +1,12 @@
+[build]
+  # The command Netlify will run to build your project
+  command = "pnpm run build"
+  
+  # The directory containing your built assets (Vite's default is "dist")
+  publish = "dist"
+
+[[redirects]]
+  # This rule ensures React Router handles all page navigation natively
+  from = "/*"
+  to = "/index.html"
+  status = 200
