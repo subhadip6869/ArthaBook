@@ -1,0 +1,6 @@
+name = "arthabook"
+# Set this to today's date
+compatibility_date = "2026-10-26"
+
+[assets]
+not_found_handling = "single-page-application"
