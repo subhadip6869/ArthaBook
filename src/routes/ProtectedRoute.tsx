@@ -1,11 +1,12 @@
 import { Navigate, Outlet } from "react-router";
+import { Loader } from "../core/components/Loader";
 import { useAuth } from "../features/auth/data/hooks/useAuth";
 
 export function ProtectedRoute() {
 	const { isAuthenticated, loading, user } = useAuth();
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return <Loader message="Verifying session..." />;
 	}
 
 	return isAuthenticated && user?.emailVerified ? (
@@ -14,3 +15,4 @@ export function ProtectedRoute() {
 		<Navigate to="/auth" replace />
 	);
 }
+

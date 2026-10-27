@@ -173,7 +173,7 @@ export function AppLayout() {
 							>
 								<HiMenuAlt2 size={24} />
 							</button>
-							<ArthabookLogo />
+							<ArthabookLogo onDark={false} />
 						</div>
 						{/* <span>arthabook</span> */}
 					</div>
